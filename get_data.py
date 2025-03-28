@@ -1,20 +1,15 @@
 import requests
-
 from get_cookie import GetCookie
+import process_html
 
-# 目标 URL
+
 class GetData:
 
     def __init__(self, url):
         self.url = url
-        #url = "https://bigdatatech.nwafu.edu.cn/assignment/index.jsp"
-        # self.cookies = {'Hm_lpvt_9eca16a516f8b449709378fbcbb6b200': '1743068189',
-        #            'Hm_lvt_9eca16a516f8b449709378fbcbb6b200': '1743068185',
-        #            'HMACCOUNT': '174D9D8C3790FB00',
-        #            'JSESSIONID': '4BB48F640946DCF510B1BC4FA0103BF7'}
-
         self.cookie = GetCookie().get_cookie()
-
+        self.question_list = []
+        self.question_content = []
 
         # 伪装成浏览器的请求头
         self.headers = {
@@ -37,21 +32,17 @@ class GetData:
 
         self.session = requests.Session()
         self.session.headers.update(self.headers)
+
     def get_question_lists(self):
         response = self.session.get(self.url, cookies=self.cookie)
-        print(response.status_code)
-        print(response.text)
-        # 打开文件并写入
-        with open("output.txt", "w", encoding="utf-8") as file:
-            print(response.text, file=file)
-        return
+        self.question_list = process_html.get_list(response.text)
+        return self.question_list
 
     def get_question(self):
-        response = self.session.get("https://bigdatatech.nwafu.edu.cn/assignment/programFillGapList.jsp?proNum=1&assignID=1287", cookies=self.cookie)
-        print(response.text)
-        with open("output_question.txt", "w", encoding="utf-8") as file:
-            print(response.text, file=file)
-        return
+        for question in self.question_list:
+            response = self.session.get(question['题目链接'], cookies=self.cookie)
+            self.question_content.append(process_html.get_pieces_question(response.text))
+        return self.question_content
 
     def __del__(self):
         pass

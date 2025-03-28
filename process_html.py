@@ -74,10 +74,6 @@ def get_question(html_content:str):
     description_tag = soup.find("div", class_="cgProblemContentClass")
     description = description_tag.get_text("\n", strip=True) if description_tag else "无描述"
 
-    # 打印题目信息
-    print("题目标题:", title)
-    print("题目描述:\n", description)
-
     return {
         "题目标题": title,
         "题目描述": description
@@ -106,11 +102,6 @@ def get_pieces_question(html_content:str):
 
     # 提取代码文本并拼接
     python_code = "\n".join(block.get_text("\n", strip=True) for block in code_blocks)
-
-    # 打印题目信息
-    print("题目标题:", title)
-    print("题目描述:\n", description)
-    print("题目代码：\n", python_code)
 
     return {
         "题目标题": title,
