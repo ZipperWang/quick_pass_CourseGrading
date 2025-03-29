@@ -15,8 +15,8 @@ class GetAnswer:
             # 此处以qwen-plus为例，可按需更换模型名称。模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
             messages=[
                 {'role': 'system',
-                 'content': "现在你是一名Python初学者，你需要解决一道编程题，要求:input"
-                            "函数参数必须为空，严格按照题目例子输出答案代码，以列表格式输出需要填的空的答案，你只需要输出答案就可以.并删除```python"
+                 'content': "现在你是一名Python初学者，你需要解决一道程序片段编程题。"
+                            "要求:input函数参数必须为空，严格按照题目例子输出答案代码，以列表格式输出需要填的空的答案，你只需要找出题目的空并输出答案就可以.并删除```python"
                             "例如['答案1','答案2']"},
                 {'role': 'user', 'content': question + code}],
         )
@@ -27,8 +27,8 @@ class GetAnswer:
             model=config['model_name'],
             messages=[
                 {'role': 'system',
-                 'content': "现在你是一名Python初学者，你需要解决一道编程题，要求:input"
-                            "函数参数必须为空，严格按照题目例子输出答案代码，你只需要输出答案就可以.并删除```python"
+                 'content': "现在你是一名Python初学者，你需要解决一道编程题。"
+                            "要求:input函数参数必须为空，严格按照题目例子输出答案代码，你只需要输出答案就可以.并删除```python"
                             "例如: print('hello world')"},
                 {'role': 'user', 'content': question}],
         )

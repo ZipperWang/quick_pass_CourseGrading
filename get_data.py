@@ -50,8 +50,15 @@ class GetData:
 
     def get_question(self, url):
         response = self.session.get(url, cookies=self.cookie)
-        self.question_content.append(process_html.get_pieces_question(response.text))
-        return self.question_content
+        real_data = process_html.get_question(response.text)
+        self.question_content.append(real_data)
+        return real_data
+
+    def get_pieces_question(self, url):
+        response = self.session.get(url, cookies=self.cookie)
+        real_data = process_html.get_pieces_question(response.text)
+        self.question_content.append(real_data)
+        return real_data
 
     def __del__(self):
         pass
