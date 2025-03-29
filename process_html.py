@@ -1,8 +1,10 @@
+import re
+
 from bs4 import BeautifulSoup
 from Config import config
 
 
-def get_list(html_content:str):
+def get_list(html_content: str):
     # # 读取 HTML 文件
     # with open("output.txt", "r", encoding="utf-8") as file:
     #     html_content = file.read()
@@ -57,7 +59,7 @@ def get_list(html_content:str):
     return questions_data
 
 
-def get_question(html_content:str):
+def get_question(html_content: str):
     # 读取 HTML 文件内容
     # file_path = "output_question.txt"
     # with open(file_path, "r", encoding="utf-8", errors="ignore") as file:
@@ -80,7 +82,7 @@ def get_question(html_content:str):
     }
 
 
-def get_pieces_question(html_content:str):
+def get_pieces_question(html_content: str):
     # # 读取 HTML 文件内容
     # file_path = "output_question.txt"
     # with open(file_path, "r", encoding="utf-8", errors="ignore") as file:
@@ -109,10 +111,30 @@ def get_pieces_question(html_content:str):
         "题目代码": python_code
     }
 
+def get_chapter(html_content:str):
+    soup = BeautifulSoup(html_content, "html.parser")
+
+    # 查找所有作业章节的相关信息
+    assignments = []
+
+    # 查找所有作业的章节链接和标题
+    for item in soup.find_all('a', class_='list-group-item list-group-item-action active'):
+        chapter_title = item.get_text(strip=True)
+        chapter_link = item.get('href')
+        assignments.append({
+            '章节标题': chapter_title,
+            '章节链接': config['url']['chapter_list'] + chapter_link
+        })
+
+    for item in soup.find_all('a', class_='list-group-item list-group-item-action'):
+        chapter_title = item.get_text(strip=True)
+        chapter_link = item.get('href')
+        assignments.append({
+            '章节标题': chapter_title,
+            '章节链接': config['url']['chapter_list'] + chapter_link
+        })
+
+    return assignments
 
 if __name__ == "__main__":
-    # 读取 HTML 文件内容
-    file_path = "output_question.txt"
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as file:
-        content = file.read()
-    get_pieces_question(content)
+    pass
