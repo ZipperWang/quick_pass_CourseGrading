@@ -17,7 +17,8 @@ class GetAnswer:
                 {'role': 'system',
                  'content': "现在你是一名Python初学者，你需要解决一道程序片段编程题。"
                             "要求:input函数参数必须为空，严格按照题目例子输出答案代码，以列表格式输出需要填的空的答案，你只需要找出题目的空并输出答案就可以.并删除```python"
-                            "例如['答案1','答案2']"},
+                            "例如['答案1','答案2']"
+                            "使用utf-8编码"},
                 {'role': 'user', 'content': question + code}],
         )
         return completion.model_dump_json()
@@ -28,8 +29,9 @@ class GetAnswer:
             messages=[
                 {'role': 'system',
                  'content': "现在你是一名Python初学者，你需要解决一道编程题。"
-                            "要求:input函数参数必须为空，严格按照题目例子输出答案代码，你只需要输出答案就可以.并删除```python"
-                            "例如: print('hello world')"},
+                            "要求:判断题目是否需要input函数, 且input函数参数必须为空，严格按照题目例子输出答案代码，你只需要输出答案就可以.并删除```python"
+                            "例如: print('hello world')"
+                            "使用utf-8编码"},
                 {'role': 'user', 'content': question}],
         )
         return completion.model_dump_json()

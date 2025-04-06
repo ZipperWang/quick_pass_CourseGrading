@@ -7,9 +7,9 @@ import process_html
 
 class GetData:
 
-    def __init__(self, url):
+    def __init__(self, url, cookie):
         self.url = url
-        self.cookie = GetCookie().get_cookie()
+        self.cookie = cookie
         self.chapter_list = []
         self.question_list = []
         self.question_content = []
