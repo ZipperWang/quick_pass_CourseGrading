@@ -7,8 +7,8 @@ config = {
         "question_list": "https://bigdatatech.nwafu.edu.cn/assignment/index.jsp"
     },
     # 用户参数设置
-    "username": "2024011843",
-    "password": ".12wzp12.",
+    "username": "your_username",
+    "password": "password",
     # 大模型参数设置
     "model_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
     "model_name": "deepseek-r1",
