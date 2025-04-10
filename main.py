@@ -1,3 +1,5 @@
+import time
+
 import requests
 from get_data import GetData
 from get_answer import GetAnswer
@@ -23,18 +25,23 @@ if __name__ == "__main__":
         for question_list in get_data.get_question_lists(chapter['章节链接']):
             if question_list['类别'] == "程序片段编程题":
                 question_content = get_data.get_pieces_question(question_list['题目链接'])
+                time.sleep(3)
                 answer = get_answer.get_pieces_answer(question_content['题目描述'], question_content['题目代码'])
-                print(get_content(answer))
+                print(answer)
                 submit_pieces_data(question_list['题目链接'],
-                                   list(get_content(answer)), driver)
+                                   eval(answer), driver)
+                time.sleep(3)
             elif question_list['类别'] == "编程题":
                 question_content = get_data.get_question(question_list['题目链接'])
+                time.sleep(3)
                 answer = get_answer.get_normal_answer(question_content['题目描述'])
-                print(get_content(answer))
+                print(answer)
                 try:
                     submit_data(question_list['题目链接'],
-                                get_content(answer), driver)
+                                answer, driver)
+                    time.sleep(3)
                 except:
-                    submit_data_file(question_list['题目链接'], get_content(answer), driver)
+                    submit_data_file(question_list['题目链接'], answer, driver)
+                    time.sleep(3)
     driver.quit()
 

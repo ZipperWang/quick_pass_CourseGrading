@@ -133,7 +133,7 @@ def submit_data_file(url, answer: str, driver):
     driver.get(url)
     time.sleep(2)
 
-    with open("answer.py", "w") as file:
+    with open("answer.py", "w", encoding="utf-8") as file:
         file.write(answer)
 
     upload_input = driver.find_element(By.ID, "CGFILE")
