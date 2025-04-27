@@ -16,19 +16,19 @@ def submit_pieces_data(url, answer: list, driver):
     time.sleep(2)
 
     # 设置答案：answer1、answer2、answer3
-    driver.find_element(By.NAME, "answer1").clear()
-    driver.find_element(By.NAME, "answer1").send_keys(answer[0])
-
-    driver.find_element(By.NAME, "answer2").clear()
-    driver.find_element(By.NAME, "answer2").send_keys(answer[1])
-
-    driver.find_element(By.NAME, "answer3").clear()
-    driver.find_element(By.NAME, "answer3").send_keys(answer[2])
-    # count = 1
-    # for e in answer:
-    #     driver.find_element(By.NAME, f"answer{count}").clear()
-    #     driver.find_element(By.NAME, f"answer{count}").send_keys(e)
-    #     count += 1
+    # driver.find_element(By.NAME, "answer1").clear()
+    # driver.find_element(By.NAME, "answer1").send_keys(answer[0])
+    #
+    # driver.find_element(By.NAME, "answer2").clear()
+    # driver.find_element(By.NAME, "answer2").send_keys(answer[1])
+    #
+    # driver.find_element(By.NAME, "answer3").clear()
+    # driver.find_element(By.NAME, "answer3").send_keys(answer[2])
+    count = 1
+    for e in answer:
+        driver.find_element(By.NAME, f"answer{count}").clear()
+        driver.find_element(By.NAME, f"answer{count}").send_keys(e)
+        count += 1
 
     # 点击“提交”按钮
     submit_btn = driver.find_element(By.ID, "cgSubmitBtn")

@@ -13,14 +13,15 @@ class GetCookie:
         service = Service(EDGEDRIVER_PATH)
         self.driver = webdriver.Edge(service=service)
         self.driver.get(config['url']['login'])
-        time.sleep(2)
+        time.sleep(1)
         username_input = self.driver.find_element(By.NAME, "username")
         password_input = self.driver.find_element(By.NAME, "password")
         username_input.send_keys(config['username'])
         password_input.send_keys(config['password'])
         login_button = self.driver.find_element(By.ID, "login_submit")
+        time.sleep(1)
         login_button.click()
-        time.sleep(2)
+        time.sleep(1)
         self.cookies = self.driver.get_cookies()
         self.cookie = {}
         for element in self.cookies:
