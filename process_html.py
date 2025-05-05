@@ -2,7 +2,7 @@ import re
 
 from bs4 import BeautifulSoup
 from Config import config
-
+import lxml
 
 def get_list(html_content: str):
     # # 读取 HTML 文件

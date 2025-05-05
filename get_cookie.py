@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.common.by import By
+
+from selenium import webdriver
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 import time
 
 from Config import config
@@ -9,8 +12,7 @@ from Config import config
 class GetCookie:
 
     def __init__(self):
-        EDGEDRIVER_PATH = config['EDGEDRIVER_PATH']
-        service = Service(EDGEDRIVER_PATH)
+        service = Service(EdgeChromiumDriverManager().install())
         self.driver = webdriver.Edge(service=service)
         self.driver.get(config['url']['login'])
         time.sleep(1)
